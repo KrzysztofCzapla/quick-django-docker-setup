@@ -14,15 +14,14 @@ class Settings:
         self.filepath = f"./{outer_folder_name}/{inner_folder_name}/settings.py"
 
         # lines positions after environ
-        self.installed_apps_ending_line = 43
-        self.middleware_ending_line = 53
-        self.db_engine_line = 81
-        self.db_name_line = 82
-        self.db_last_line = 83
-        self.last_line = 127
-
-        self.important_lines = [self.installed_apps_ending_line, self.middleware_ending_line,
-                                self.db_engine_line, self.db_name_line, self.db_last_line, self.last_line]
+        self.important_lines = {
+            'installed_apps_ending_line': 43,
+            'middleware_ending_line': 53,
+            'db_engine_line': 81,
+            'db_name_line': 82,
+            'db_last_line': 83,
+            'last_line': 127
+        }
 
     def insert_text_in_settings(self, line: int, text: str):
         insert_text_at_line(self.filepath, line, text)
@@ -31,8 +30,10 @@ class Settings:
         change_text_at_line(self.filepath, line, text)
 
     def add_to_important_lines(self, number: int = 1):
-        for line in self.important_lines:
-            line += 1
+        for key in self.important_lines:
+            self.important_lines[key] += number
+
+        print(self.important_lines)
 
     def environ_on_secret_and_debug(self):
         self.insert_text_in_settings(14, "import environ")
@@ -50,40 +51,38 @@ class Settings:
 
         for app in apps_list:
             app_name = f"    '{app}',"
-            self.insert_text_in_settings(self.installed_apps_ending_line, app_name)
+            self.insert_text_in_settings(self.important_lines['installed_apps_ending_line'], app_name)
             self.add_to_important_lines()
 
     def add_postgres(self):
-        self.change_text_in_settings(self.db_engine_line, '        "ENGINE": "django.db.backends.postgresql"')
-        self.change_text_in_settings(self.db_name_line, '        "NAME": env("POSTGRES_DB"),')
-        self.add_to_important_lines(2)
-
-        self.insert_text_in_settings(self.db_last_line, postgres_db)
-        self.add_to_important_lines(4)
+        self.change_text_in_settings(self.important_lines['db_engine_line'], '        "ENGINE": "django.db.backends.postgresql",')
+        self.change_text_in_settings(self.important_lines['db_name_line'], '        "NAME": env("POSTGRES_DB"),')
+        self.insert_text_in_settings(self.important_lines['db_last_line'], postgres_db)
+        self.add_to_important_lines(5)
 
     def add_rest_framework(self):
         if self.use_jwt:
-            self.insert_text_in_settings(self.last_line, rest_framework_jwt)
-            self.add_to_important_lines(3)
+            self.insert_text_in_settings(self.important_lines['last_line'], rest_framework_jwt)
+            self.add_to_important_lines(8)
         else:
-            self.insert_text_in_settings(self.last_line, rest_framework_no_jwt)
-            self.add_to_important_lines(6)
+            self.insert_text_in_settings(self.important_lines['last_line'], rest_framework_no_jwt)
+            self.add_to_important_lines(5)
 
     def add_jwt(self):
-        self.insert_text_in_settings(self.last_line, jwt)
-        self.add_to_important_lines(5)
+        self.insert_text_in_settings(self.important_lines['last_line'], jwt)
+        self.add_to_important_lines(6)
 
     def add_registration(self):
-        self.insert_text_in_settings(self.last_line, registration)
-        self.add_to_important_lines(3)
+        self.insert_text_in_settings(self.important_lines['last_line'], registration)
+        self.add_to_important_lines(4)
 
     def add_celery(self):
-        self.insert_text_in_settings(self.last_line, celery)
-        self.add_to_important_lines(10)
+        self.insert_text_in_settings(self.important_lines['last_line'], celery)
+        self.add_to_important_lines(11)
 
     def add_swagger(self):
-        self.insert_text_in_settings(self.last_line, swagger)
-        self.add_to_important_lines(1)
+        self.insert_text_in_settings(self.important_lines['last_line'], swagger)
+        self.add_to_important_lines(2)
 
     def run(self):
         self.environ_on_secret_and_debug()
@@ -99,5 +98,5 @@ class Settings:
 
         if self.use_celery: self.add_celery()
 
-        if self.use_swagger: self.use_swagger()
+        if self.use_swagger: self.add_swagger()
 
