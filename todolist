@@ -11,35 +11,18 @@
 5.5) Do you want registration with dj_auth?
 
 6) Do you want swagger?
+
+7) do you want makefile?
 ##
-1) Create django project with given name and folder name
-
-2) create dockerfile and docker compose:
-
-	if poetry:
-		install poetry
-		create poetry file
-		add few lines to dockerfile
-	else:
-		requirements py
-		add few lines to dockerfile
-
-	you can just create a basic docker file with two things to put in it
-
-	create docker compose
-
-3)
-	if postgresql then inject the corect lines in settings and in docker-compose yml
-	remember to add packages prob create a function for that
-4)  if celery then create celery files, inject lines in settings(remember than lines may change if postgres is created) and create docker compose
-	remember to add packages
-5)	install packages and add to urls and settings
-
-5.5) same as above
-
-6) same as above
-
-
-
-
 W poniedzialek powinienes ogarnac caly projekt raczej, najpozniej do wtorku
+
+klasy/pliki:
+1) Function to create Django project
+Class Settings(postgresql, jwt, registration, celery, swagger)
+class Urls(jwt, registration, swagger) # make swagger for debug only
+class Celery + __init__.py
+class Dockerfile(poetry)
+class docker-compose (postgresql, celery)
+class Makefile
+class EnvFile (postgres, celery)
+
