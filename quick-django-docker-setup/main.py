@@ -1,24 +1,25 @@
-from utils import create_django_project
+from django_project import DjangoProject
+from settings import Settings
+from utils import ask_questions, print_progress
+
 
 def main():
 
-    # poetry = input('Do You want to use Poetry as dependency manager? [yN] ').strip().lower()
-    #
-    # postgres = input('Do You want to use dockerized PostgreSQL as Your Database? [yN] ').strip().lower()
-    #
-    # celery = input('Do You want to use dockerized Celery with Redis for Asynchronous tasks? [yN] ').strip().lower()
-    #
-    # jwt = input('Do You want to use JWT Authentication provided by "dj_rest_auth" package? [yN] ').strip().lower()
-    #
-    # registration = input('Do You want to use registration provided by "dj_rest_auth" package? [yN] ').strip().lower()
-    #
-    # swagger = input('Do You want to use swagger as API Documentation? [yN] ').strip().lower()
+    output = ask_questions()
 
-    backend_folder = input('Do You want to put django code inside "backend" folder?  [yN] ').strip().lower()
+    outer_folder_name = "backend" if output["backend_folder"] else output["project_name"]
 
-    project_name = input('How do You want to name the project? ').strip().lower()
+    steps = [
+        DjangoProject(backend_folder=output["backend_folder"], project_name=output["project_name"]),
+        Settings(use_postgres=output["postgres"], use_jwt=output["jwt"], use_registration=output["registration"],
+                 use_celery=output["celery"], use_swagger=output["swagger"],
+                 outer_folder_name=outer_folder_name, inner_folder_name=output["project_name"])
+    ]
+    steps_len = len(steps)
 
-    create_django_project(backend_folder=backend_folder, project_name=project_name)
+    for i, step in enumerate(steps):
+        print_progress(iteration=i, total=steps_len, current_task=step)
+        step.run()
 
 
 if __name__ == '__main__':
