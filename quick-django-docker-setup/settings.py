@@ -1,4 +1,4 @@
-from settings_to_insert import postgres_db, rest_framework_jwt, rest_framework_no_jwt, jwt, registration, celery, \
+from text_to_insert.settings_to_insert import postgres_db, rest_framework_jwt, rest_framework_no_jwt, jwt, registration, celery, \
     swagger
 from utils import insert_text_at_line, change_text_at_line
 
@@ -32,8 +32,6 @@ class Settings:
     def add_to_important_lines(self, number: int = 1):
         for key in self.important_lines:
             self.important_lines[key] += number
-
-        print(self.important_lines)
 
     def environ_on_secret_and_debug(self):
         self.insert_text_in_settings(14, "import environ")
