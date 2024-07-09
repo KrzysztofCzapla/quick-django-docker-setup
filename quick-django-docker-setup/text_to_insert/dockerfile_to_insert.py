@@ -1,4 +1,4 @@
-def get_dockerfile_without_poetry(outer_foldername: str) -> str:
+def get_dockerfile_with_poetry(outer_foldername: str) -> str:
     return f"""FROM python:3.11.4-slim-buster
 
 WORKDIR /{outer_foldername}

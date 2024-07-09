@@ -34,7 +34,8 @@ def get_backend_service_text(use_postgres: bool, outer_foldername: str) -> str:
     return text
 
 def get_database_service_text(outer_foldername: str) -> str:
-    return f"""  database:
+    return f"""
+      database:
     container_name: database
     image: postgis/postgis:15-3.3-alpine
     env_file:
@@ -50,7 +51,8 @@ def get_celery_service_text(use_postgres: bool, outer_foldername: str) -> str:
     else:
         database_text = ""
 
-    return f"""  redis:
+    return f"""
+      redis:
     container_name: redis
     image: redis:alpine
     env_file:
@@ -88,5 +90,6 @@ def get_celery_service_text(use_postgres: bool, outer_foldername: str) -> str:
 
 def get_volume_text() -> str:
     return """
+    
 volumes:
   postgres-data:"""

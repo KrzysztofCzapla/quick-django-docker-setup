@@ -1,6 +1,6 @@
 import subprocess
 import sys
-
+import shutil
 from utils import create_file_and_insert
 
 
@@ -14,8 +14,10 @@ class PackageManager:
             use_celery: bool,
             use_swagger: bool,
             project_name: str,
+            outer_foldername: str
     ):
         self.project_name = project_name
+        self.outer_foldername = outer_foldername
 
         self.use_poetry = use_poetry
         self.use_postgres = use_postgres
@@ -77,6 +79,10 @@ class PackageManager:
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
+
+        # copy poetry file into subfolder
+        shutil.move("pyproject.toml", f"./{self.outer_foldername}/pyproject.toml")
+        shutil.move("poetry.lock", f"./{self.outer_foldername}/poetry.lock")
 
     def run_requirements(self):
         text = "\n".join(dependency for dependency in self.get_dependencies())

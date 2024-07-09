@@ -64,7 +64,7 @@ def print_progress(
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + "-" * (length - filledLength)
 
-    print(f"\r{prefix} |{bar}| {percent}% {suffix} \n Setting up {current_task}...'", end=printEnd)
+    print(f"\r{prefix} |{bar}| {percent}% {suffix} Setting up {current_task}...'", end=printEnd)
     if iteration == total:
         print()
 

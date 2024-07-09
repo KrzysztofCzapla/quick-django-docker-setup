@@ -39,7 +39,8 @@ def main():
             use_registration=output["registration"],
             use_celery=output["celery"],
             use_swagger=output["swagger"],
-            project_name=output["project_name"]),
+            project_name=output["project_name"],
+            outer_foldername=outer_folder_name),
         EnvFile(use_postgres=output["postgres"], use_celery=output["celery"], outer_foldername=outer_folder_name)
     ]
     steps_len = len(steps)
