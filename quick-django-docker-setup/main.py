@@ -1,3 +1,5 @@
+from tqdm import tqdm
+
 from celery import Celery
 from django_project import DjangoProject
 from docker_compose import DockerCompose
@@ -5,7 +7,7 @@ from dockerfile import Dockerfile
 from env_file import EnvFile
 from package_manager import PackageManager
 from settings import Settings
-from utils import ask_questions, print_progress
+from utils import ask_questions
 
 
 def main():
@@ -30,7 +32,7 @@ def main():
             inner_folder_name=output["project_name"],
         ),
         Dockerfile(use_poetry=output["poetry"], outer_foldername=outer_folder_name),
-        DockerCompose(use_postgres=output["postgres"], use_celery=output["celery"], outer_foldername=outer_folder_name),
+        DockerCompose(use_postgres=output["postgres"], use_celery=output["celery"], outer_foldername=outer_folder_name, project_name=output["project_name"]),
         PackageManager(
             use_postgres=output["postgres"],
             use_poetry=output["poetry"],
@@ -45,11 +47,8 @@ def main():
 
     if output["celery"]: steps.append(Celery(outer_folder_name=outer_folder_name, inner_folder_name=output["project_name"]))
 
-    steps_len = len(steps)
-
-    for i, step in enumerate(steps):
-        print_progress(iteration=i, total=steps_len, current_task=step)
-        step.run()
+    for step in tqdm(range(len(steps))):
+        steps[step].run()
 
     print("✨ Done ✨")
 

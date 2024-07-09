@@ -4,9 +4,10 @@ from utils import create_file_and_insert
 
 
 class DockerCompose:
-    def __init__(self, use_postgres: bool, use_celery: bool, outer_foldername: str):
+    def __init__(self, use_postgres: bool, use_celery: bool, outer_foldername: str, project_name: str):
         self.dockerfile_filepath = f"./deployment/docker/Dockerfile.py"
         self.outer_foldername = outer_foldername
+        self.project_name = project_name
 
         self.use_postgres = use_postgres
         self.use_celery = use_celery
@@ -16,7 +17,7 @@ class DockerCompose:
 
         if self.use_postgres: text += get_database_service_text(outer_foldername=self.outer_foldername)
 
-        if self.use_celery: text += get_celery_service_text(use_postgres=self.use_postgres, outer_foldername=self.outer_foldername)
+        if self.use_celery: text += get_celery_service_text(use_postgres=self.use_postgres, outer_foldername=self.outer_foldername, project_name=self.project_name)
 
         if self.use_postgres: text += get_volume_text()
 

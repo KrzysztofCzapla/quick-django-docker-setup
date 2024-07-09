@@ -1,27 +1,3 @@
-1) Check how to organize fileskk
+1) middlewares ogarnac xd
 
-2) DO you want to use poetry or requirements.txt?
-
-3) Do you want to use PostgreSQL or SQLite?
-
-4) Do you want to use Celery with Redis?
-
-5) Do you want to use JWT Authentication?
-
-5.5) Do you want registration with dj_auth?
-
-6) Do you want swagger?
-
-##
-W poniedzialek powinienes ogarnac caly projekt raczej, najpozniej do wtorku
-
-klasy/pliki:
-1) Function to create Django project
-Class Settings(postgresql, jwt, registration, celery, swagger) # jwt: rest_auth, restt_auth_classes # registration: site_Id # u prob dont need to edit middleware
-class Urls(jwt, registration, swagger) # make swagger for debug only
-class Celery + __init__.py
-class Dockerfile(poetry) # fix folder naming
-class docker-compose (postgresql, celery)
-class Poetry (or requirements)
-class EnvFile (postgres, celery)
-
+2) celery worker command app cos tam

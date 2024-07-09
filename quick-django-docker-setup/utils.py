@@ -49,26 +49,6 @@ def ask_questions():
     )
 
 
-def print_progress(
-    iteration,
-    total,
-    current_task,
-    prefix="",
-    suffix="",
-    decimals=1,
-    length=100,
-    fill="█",
-    printEnd="\r",
-):
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + "-" * (length - filledLength)
-
-    print(f"\r{prefix} |{bar}| {percent}% {suffix}", end=printEnd)
-    if iteration == total:
-        print()
-
-
 def insert_text_at_line(filename: str, line_number: int, text: str):
     with open(filename, "r") as file:
         lines = file.readlines()

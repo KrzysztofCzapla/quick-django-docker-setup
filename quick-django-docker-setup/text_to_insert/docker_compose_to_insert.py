@@ -47,7 +47,7 @@ def get_database_service_text(outer_foldername: str) -> str:
       - postgres-data:/var/lib/postgresql/data/
       """
 
-def get_celery_service_text(use_postgres: bool, outer_foldername: str) -> str:
+def get_celery_service_text(use_postgres: bool, outer_foldername: str, project_name: str) -> str:
     if use_postgres:
         database_text = "\n" + """      - database"""
     else:
@@ -66,7 +66,7 @@ def get_celery_service_text(use_postgres: bool, outer_foldername: str) -> str:
     build:
       context: ./
       dockerfile: ./deployment/docker/Dockerfile
-    command: celery -A college_enrolment_system worker -l info
+    command: celery -A {project_name} worker -l info
     volumes:
       - ./{outer_foldername}/:/{outer_foldername}
     env_file:
@@ -79,7 +79,7 @@ def get_celery_service_text(use_postgres: bool, outer_foldername: str) -> str:
     build:
       context: ./
       dockerfile: ./deployment/docker/Dockerfile
-    command: celery -A college_enrolment_system beat -l info
+    command: celery -A {project_name} beat -l info
     volumes:
       - ./{outer_foldername}/:/{outer_foldername}
     env_file:

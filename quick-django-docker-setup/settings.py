@@ -80,6 +80,13 @@ class Settings:
             )
             self.add_to_important_lines()
 
+    def edit_middelwares(self):
+        if self.use_registration:
+            self.insert_text_in_settings(
+                self.important_lines["middleware_ending_line"], '    "allauth.account.middleware.AccountMiddleware",'
+            )
+            self.add_to_important_lines()
+
     def add_postgres(self):
         self.change_text_in_settings(
             self.important_lines["db_engine_line"],
@@ -122,6 +129,7 @@ class Settings:
     def run(self):
         self.environ_on_secret_and_debug()
         self.edit_installed_apps()
+        self.edit_middelwares()
 
         if self.use_postgres:
             self.add_postgres()
