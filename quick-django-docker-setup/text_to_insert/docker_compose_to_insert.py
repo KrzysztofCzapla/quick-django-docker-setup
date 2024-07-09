@@ -25,17 +25,20 @@ def get_backend_service_text(use_postgres: bool, outer_foldername: str) -> str:
     ports:
       - 8000:8000
     env_file:
-      - ./{outer_foldername}/config/.env"""
+      - ./{outer_foldername}/config/.env
+"""
 
     if use_postgres:
         text += """    depends_on:
-      - database"""
+      - database
+      """
+    else:
+        text += "\n"
 
     return text
 
 def get_database_service_text(outer_foldername: str) -> str:
-    return f"""
-      database:
+    return "\n" + f"""  database:
     container_name: database
     image: postgis/postgis:15-3.3-alpine
     env_file:
@@ -46,13 +49,11 @@ def get_database_service_text(outer_foldername: str) -> str:
 
 def get_celery_service_text(use_postgres: bool, outer_foldername: str) -> str:
     if use_postgres:
-        database_text = """
-              - database"""
+        database_text = "\n" + """      - database"""
     else:
         database_text = ""
 
-    return f"""
-      redis:
+    return "\n" + f"""  redis:
     container_name: redis
     image: redis:alpine
     env_file:
