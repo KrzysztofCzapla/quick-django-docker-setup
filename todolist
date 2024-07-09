@@ -12,7 +12,6 @@
 
 6) Do you want swagger?
 
-7) do you want makefile?
 ##
 W poniedzialek powinienes ogarnac caly projekt raczej, najpozniej do wtorku
 
@@ -21,9 +20,8 @@ klasy/pliki:
 Class Settings(postgresql, jwt, registration, celery, swagger) # jwt: rest_auth, restt_auth_classes # registration: site_Id # u prob dont need to edit middleware
 class Urls(jwt, registration, swagger) # make swagger for debug only
 class Celery + __init__.py
-class Dockerfile(poetry)
+class Dockerfile(poetry) # fix folder naming
 class docker-compose (postgresql, celery)
-class Makefile
 class Poetry (or requirements)
 class EnvFile (postgres, celery)
 
