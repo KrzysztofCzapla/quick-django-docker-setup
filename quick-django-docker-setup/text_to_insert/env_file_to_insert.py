@@ -17,6 +17,8 @@ POSTGRES_PORT=5432"""
         CELERY_BROKER_URL=redis://redis:6379/0
 CELERY_RESULT_BACKEND=redis://redis:6379/0"""
 
+    return text
+
 
 def get_env_temp_file_text(use_postgres: bool, use_celery: bool) -> str:
     text = """SECRET_KEY={{change}}
@@ -34,3 +36,5 @@ POSTGRES_PORT=5432"""
         text += """
         CELERY_BROKER_URL=redis://redis:6379/0
 CELERY_RESULT_BACKEND=redis://redis:6379/0"""
+
+    return text
