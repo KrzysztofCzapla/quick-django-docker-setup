@@ -24,6 +24,6 @@ class Celery + __init__.py
 class Dockerfile(poetry)
 class docker-compose (postgresql, celery)
 class Makefile
-class Poetry
+class Poetry (or requirements)
 class EnvFile (postgres, celery)
 
