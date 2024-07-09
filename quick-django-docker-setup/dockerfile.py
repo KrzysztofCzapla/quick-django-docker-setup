@@ -1,4 +1,4 @@
-from text_to_insert.dockerfile_to_insert import get_dockerfile_without_poetry, get_dockerfile_without_poetry
+from text_to_insert.dockerfile_to_insert import get_dockerfile_without_poetry
 from utils import create_file_and_insert, create_folder
 
 

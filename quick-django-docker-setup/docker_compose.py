@@ -1,11 +1,9 @@
-from text_to_insert.celery_to_insert import init_text, celery_to_insert
 from text_to_insert.docker_compose_to_insert import dockerignore, get_backend_service_text, get_database_service_text, \
     get_celery_service_text, get_volume_text
-from text_to_insert.dockerfile_to_insert import dockerfile_with_poetry, dockerfile_without_poetry
-from utils import create_file_and_insert, create_folder
+from utils import create_file_and_insert
 
 
-class Dockerfile:
+class DockerCompose:
     def __init__(self, use_postgres: bool, use_celery: bool, outer_foldername: str):
         self.dockerfile_filepath = f"./deployment/docker/Dockerfile.py"
         self.outer_foldername = outer_foldername
@@ -35,6 +33,6 @@ class Dockerfile:
         )
 
     def run(self):
-        self.set_up_docker_ignore()
+        self.setup_docker_ignore()
 
         self.setup_docker_compose()
