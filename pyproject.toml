@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quick-django-docker-setup"
+version = "0.2.0"
+description = "Quick setup for Django development with Docker, Postgres, Celery and more"
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = ["quick", "django", "docker", "setup"]
+dependencies = ["tqdm"]
+
+[project.scripts]
+quick-django-docker-setup = "quick_django_docker_setup.main:main"
