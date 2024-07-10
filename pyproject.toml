@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "quick-django-docker-setup"
-version = "0.2.0"
+version = "0.3.0"
 description = "Quick setup for Django development with Docker, Postgres, Celery and more"
 readme = "README.md"
 license = { file = "LICENSE" }
