@@ -12,6 +12,7 @@ docker-compose.yml
 **/venv
 **/env"""
 
+
 def get_backend_service_text(use_postgres: bool, outer_foldername: str) -> str:
     text = f"""services:
   backend:
@@ -37,8 +38,11 @@ def get_backend_service_text(use_postgres: bool, outer_foldername: str) -> str:
 
     return text
 
+
 def get_database_service_text(outer_foldername: str) -> str:
-    return "\n" + f"""  database:
+    return (
+        "\n"
+        + f"""  database:
     container_name: database
     image: postgis/postgis:15-3.3-alpine
     env_file:
@@ -46,14 +50,20 @@ def get_database_service_text(outer_foldername: str) -> str:
     volumes:
       - postgres-data:/var/lib/postgresql/data/
       """
+    )
 
-def get_celery_service_text(use_postgres: bool, outer_foldername: str, project_name: str) -> str:
+
+def get_celery_service_text(
+    use_postgres: bool, outer_foldername: str, project_name: str
+) -> str:
     if use_postgres:
         database_text = "\n" + """      - database"""
     else:
         database_text = ""
 
-    return "\n" + f"""  redis:
+    return (
+        "\n"
+        + f"""  redis:
     container_name: redis
     image: redis:alpine
     env_file:
@@ -87,6 +97,7 @@ def get_celery_service_text(use_postgres: bool, outer_foldername: str, project_n
     depends_on:
       - redis
       - celery-worker{database_text}"""
+    )
 
 
 def get_volume_text() -> str:

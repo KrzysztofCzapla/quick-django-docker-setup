@@ -6,15 +6,15 @@ from quick_django_docker_setup.utils import create_file_and_insert
 
 class PackageManager:
     def __init__(
-            self,
-            use_postgres: bool,
-            use_poetry: bool,
-            use_jwt: bool,
-            use_registration: bool,
-            use_celery: bool,
-            use_swagger: bool,
-            project_name: str,
-            outer_foldername: str
+        self,
+        use_postgres: bool,
+        use_poetry: bool,
+        use_jwt: bool,
+        use_registration: bool,
+        use_celery: bool,
+        use_swagger: bool,
+        project_name: str,
+        outer_foldername: str,
     ):
         self.project_name = project_name
         self.outer_foldername = outer_foldername
@@ -29,10 +29,10 @@ class PackageManager:
     def check_poetry_installed(self):
         try:
             subprocess.run(
-                [sys.executable, '-m', 'pip', 'show', 'poetry'],
+                [sys.executable, "-m", "pip", "show", "poetry"],
                 check=True,
                 stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL
+                stderr=subprocess.DEVNULL,
             )
             return True
         except subprocess.CalledProcessError:
@@ -40,49 +40,50 @@ class PackageManager:
 
     def install_poetry(self):
         subprocess.run(
-            [sys.executable, '-m', 'pip', 'install', 'poetry'],
+            [sys.executable, "-m", "pip", "install", "poetry"],
             check=True,
             stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
+            stderr=subprocess.DEVNULL,
         )
 
     def uninstall_poetry(self):
         subprocess.run(
-            [sys.executable, '-m', 'pip', 'uninstall', '-y', 'poetry'],
+            [sys.executable, "-m", "pip", "uninstall", "-y", "poetry"],
             check=True,
             stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
+            stderr=subprocess.DEVNULL,
         )
 
     def get_dependencies(self):
         dependencies = ["django", "django-environ", "djangorestframework"]
 
-        if self.use_postgres: dependencies.extend(["psycopg2-binary"])
-        if self.use_jwt: dependencies.extend(["djangorestframework-simplejwt", "dj-rest-auth"])
-        if self.use_registration: dependencies.extend(["dj-rest-auth[with_social]"])
-        if self.use_celery: dependencies.extend(["celery[redis]", "django-celery-beat"])
-        if self.use_swagger: dependencies.extend(["drf-yasg"])
+        if self.use_postgres:
+            dependencies.extend(["psycopg2-binary"])
+        if self.use_jwt:
+            dependencies.extend(["djangorestframework-simplejwt", "dj-rest-auth"])
+        if self.use_registration:
+            dependencies.extend(["dj-rest-auth[with_social]"])
+        if self.use_celery:
+            dependencies.extend(["celery[redis]", "django-celery-beat"])
+        if self.use_swagger:
+            dependencies.extend(["drf-yasg"])
 
         return dependencies
 
     def poetry_install_dependencies(self):
-        answers = "\n".join([
-            self.project_name,
-            "0.1.0",
-            self.project_name,
-            "n",
-            "",
-            "",
-            "n",
-            "n"
-        ]) + "\n"
+        answers = (
+            "\n".join(
+                [self.project_name, "0.1.0", self.project_name, "n", "", "", "n", "n"]
+            )
+            + "\n"
+        )
 
         process = subprocess.Popen(
             ["poetry", "init"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
         )
 
         process.communicate(input=answers)
@@ -91,7 +92,7 @@ class PackageManager:
             ["poetry", "add"] + self.get_dependencies(),
             check=True,
             stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
+            stderr=subprocess.DEVNULL,
         )
 
         # copy poetry file into subfolder
@@ -116,5 +117,3 @@ class PackageManager:
             self.run_poetry()
         else:
             self.run_requirements()
-
-

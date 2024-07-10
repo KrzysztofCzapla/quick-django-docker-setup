@@ -1,4 +1,7 @@
-from quick_django_docker_setup.text_to_insert.celery_to_insert import init_text, celery_to_insert
+from quick_django_docker_setup.text_to_insert.celery_to_insert import (
+    init_text,
+    celery_to_insert,
+)
 from quick_django_docker_setup.utils import insert_text_at_line, create_file_and_insert
 
 

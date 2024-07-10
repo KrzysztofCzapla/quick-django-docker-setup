@@ -1,4 +1,7 @@
-from quick_django_docker_setup.text_to_insert.env_file_to_insert import get_env_file_text, get_env_temp_file_text
+from quick_django_docker_setup.text_to_insert.env_file_to_insert import (
+    get_env_file_text,
+    get_env_temp_file_text,
+)
 from quick_django_docker_setup.utils import create_file_and_insert, create_folder
 
 
@@ -16,11 +19,17 @@ class EnvFile:
 
     def insert_in_envs(self):
         create_file_and_insert(
-            self.env_filepath, get_env_file_text(use_postgres=self.use_postgres, use_celery=self.use_celery)
+            self.env_filepath,
+            get_env_file_text(
+                use_postgres=self.use_postgres, use_celery=self.use_celery
+            ),
         )
 
         create_file_and_insert(
-            self.env_template_filepath, get_env_temp_file_text(use_postgres=self.use_postgres, use_celery=self.use_celery)
+            self.env_template_filepath,
+            get_env_temp_file_text(
+                use_postgres=self.use_postgres, use_celery=self.use_celery
+            ),
         )
 
     def run(self):

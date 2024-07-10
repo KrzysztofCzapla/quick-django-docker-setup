@@ -12,3 +12,6 @@ keywords = ["quick", "django", "docker", "setup"]
 
 [project.scripts]
 quick-django-docker-setup = "quick_django_docker_setup.main:main"
+
+[project.urls]
+Source = "https://github.com/django/django"

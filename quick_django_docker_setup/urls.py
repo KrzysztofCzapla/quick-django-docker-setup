@@ -1,4 +1,8 @@
-from quick_django_docker_setup.text_to_insert.urls_to_insert import imports, schema_view, swagger_path
+from quick_django_docker_setup.text_to_insert.urls_to_insert import (
+    imports,
+    schema_view,
+    swagger_path,
+)
 from quick_django_docker_setup.utils import insert_text_at_line, change_text_at_line
 
 

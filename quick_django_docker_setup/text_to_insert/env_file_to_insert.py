@@ -1,5 +1,3 @@
-
-
 def get_env_file_text(use_postgres: bool, use_celery: bool) -> str:
     text = """SECRET_KEY=django-insecure-(^*b^9afma4119+v*donkkox0cm9hduawhdai#$(*)
 DEBUG=1

@@ -83,7 +83,8 @@ class Settings:
     def edit_middelwares(self):
         if self.use_registration:
             self.insert_text_in_settings(
-                self.important_lines["middleware_ending_line"], '    "allauth.account.middleware.AccountMiddleware",'
+                self.important_lines["middleware_ending_line"],
+                '    "allauth.account.middleware.AccountMiddleware",',
             )
             self.add_to_important_lines()
 

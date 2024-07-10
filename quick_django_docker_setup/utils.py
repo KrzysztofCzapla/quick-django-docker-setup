@@ -73,5 +73,6 @@ def create_file_and_insert(filename: str, text: str):
     with open(filename, "w") as file:
         file.writelines(text)
 
+
 def create_folder(foldername: str):
     os.mkdir(f"./{foldername}")

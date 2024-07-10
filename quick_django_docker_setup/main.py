@@ -30,7 +30,12 @@ def main():
             inner_folder_name=output["project_name"],
         ),
         Dockerfile(use_poetry=output["poetry"], outer_foldername=outer_folder_name),
-        DockerCompose(use_postgres=output["postgres"], use_celery=output["celery"], outer_foldername=outer_folder_name, project_name=output["project_name"]),
+        DockerCompose(
+            use_postgres=output["postgres"],
+            use_celery=output["celery"],
+            outer_foldername=outer_folder_name,
+            project_name=output["project_name"],
+        ),
         PackageManager(
             use_postgres=output["postgres"],
             use_poetry=output["poetry"],
@@ -39,11 +44,22 @@ def main():
             use_celery=output["celery"],
             use_swagger=output["swagger"],
             project_name=output["project_name"],
-            outer_foldername=outer_folder_name),
-        EnvFile(use_postgres=output["postgres"], use_celery=output["celery"], outer_foldername=outer_folder_name)
+            outer_foldername=outer_folder_name,
+        ),
+        EnvFile(
+            use_postgres=output["postgres"],
+            use_celery=output["celery"],
+            outer_foldername=outer_folder_name,
+        ),
     ]
 
-    if output["celery"]: steps.append(Celery(outer_folder_name=outer_folder_name, inner_folder_name=output["project_name"]))
+    if output["celery"]:
+        steps.append(
+            Celery(
+                outer_folder_name=outer_folder_name,
+                inner_folder_name=output["project_name"],
+            )
+        )
 
     for step in steps:
         step.run()
