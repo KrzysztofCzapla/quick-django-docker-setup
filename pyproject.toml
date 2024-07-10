@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "quick-django-docker-setup"
-version = "0.3.0"
+version = "0.4.0"
 description = "Quick setup for Django development with Docker, Postgres, Celery and more"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -14,4 +14,4 @@ keywords = ["quick", "django", "docker", "setup"]
 quick-django-docker-setup = "quick_django_docker_setup.main:main"
 
 [project.urls]
-Source = "https://github.com/django/django"
+Source = "https://github.com/KrzysztofCzapla/quick-django-docker-setup"
