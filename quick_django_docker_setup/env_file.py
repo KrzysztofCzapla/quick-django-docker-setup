@@ -1,5 +1,5 @@
-from text_to_insert.env_file_to_insert import get_env_file_text, get_env_temp_file_text
-from utils import create_file_and_insert, create_folder
+from quick_django_docker_setup.text_to_insert.env_file_to_insert import get_env_file_text, get_env_temp_file_text
+from quick_django_docker_setup.utils import create_file_and_insert, create_folder
 
 
 class EnvFile:

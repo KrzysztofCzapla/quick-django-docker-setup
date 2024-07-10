@@ -1,13 +1,11 @@
-from tqdm import tqdm
-
-from celery import Celery
-from django_project import DjangoProject
-from docker_compose import DockerCompose
-from dockerfile import Dockerfile
-from env_file import EnvFile
-from package_manager import PackageManager
-from settings import Settings
-from utils import ask_questions
+from quick_django_docker_setup.celery import Celery
+from quick_django_docker_setup.django_project import DjangoProject
+from quick_django_docker_setup.docker_compose import DockerCompose
+from quick_django_docker_setup.dockerfile import Dockerfile
+from quick_django_docker_setup.env_file import EnvFile
+from quick_django_docker_setup.package_manager import PackageManager
+from quick_django_docker_setup.settings import Settings
+from quick_django_docker_setup.utils import ask_questions
 
 
 def main():
@@ -47,8 +45,8 @@ def main():
 
     if output["celery"]: steps.append(Celery(outer_folder_name=outer_folder_name, inner_folder_name=output["project_name"]))
 
-    for step in tqdm(range(len(steps))):
-        steps[step].run()
+    for step in steps:
+        step.run()
 
     print("✨ Done ✨")
 

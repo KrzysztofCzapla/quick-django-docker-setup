@@ -9,7 +9,6 @@ description = "Quick setup for Django development with Docker, Postgres, Celery 
 readme = "README.md"
 license = { file = "LICENSE" }
 keywords = ["quick", "django", "docker", "setup"]
-dependencies = ["tqdm"]
 
 [project.scripts]
 quick-django-docker-setup = "quick_django_docker_setup.main:main"

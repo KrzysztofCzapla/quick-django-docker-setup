@@ -1,7 +1,7 @@
 import subprocess
 import sys
 import shutil
-from utils import create_file_and_insert
+from quick_django_docker_setup.utils import create_file_and_insert
 
 
 class PackageManager:

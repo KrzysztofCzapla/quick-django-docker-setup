@@ -1,6 +1,6 @@
-from text_to_insert.docker_compose_to_insert import dockerignore, get_backend_service_text, get_database_service_text, \
+from quick_django_docker_setup.text_to_insert.docker_compose_to_insert import dockerignore, get_backend_service_text, get_database_service_text, \
     get_celery_service_text, get_volume_text
-from utils import create_file_and_insert
+from quick_django_docker_setup.utils import create_file_and_insert
 
 
 class DockerCompose:

@@ -1,4 +1,4 @@
-from text_to_insert.settings_to_insert import (
+from quick_django_docker_setup.text_to_insert.settings_to_insert import (
     postgres_db,
     rest_framework_jwt,
     rest_framework_no_jwt,
@@ -7,7 +7,7 @@ from text_to_insert.settings_to_insert import (
     celery,
     swagger,
 )
-from utils import insert_text_at_line, change_text_at_line
+from quick_django_docker_setup.utils import insert_text_at_line, change_text_at_line
 
 
 class Settings:

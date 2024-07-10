@@ -1,5 +1,5 @@
-from text_to_insert.dockerfile_to_insert import get_dockerfile_without_poetry, get_dockerfile_with_poetry
-from utils import create_file_and_insert, create_folder
+from quick_django_docker_setup.text_to_insert.dockerfile_to_insert import get_dockerfile_without_poetry, get_dockerfile_with_poetry
+from quick_django_docker_setup.utils import create_file_and_insert, create_folder
 
 
 class Dockerfile:

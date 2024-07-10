@@ -2,3 +2,6 @@
 .env
 .pyc
 .__pycache__/
+build/
+dist/
+quick_django_docker_setup.egg-info/
