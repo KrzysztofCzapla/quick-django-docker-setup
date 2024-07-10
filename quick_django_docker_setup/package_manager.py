@@ -66,12 +66,26 @@ class PackageManager:
         return dependencies
 
     def poetry_install_dependencies(self):
-        subprocess.run(
+        answers = "\n".join([
+            self.project_name,
+            "0.1.0",
+            self.project_name,
+            "n",
+            "",
+            "",
+            "n",
+            "n"
+        ]) + "\n"
+
+        process = subprocess.Popen(
             ["poetry", "init"],
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
         )
+
+        process.communicate(input=answers)
 
         subprocess.run(
             ["poetry", "add"] + self.get_dependencies(),
